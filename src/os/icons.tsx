@@ -8,12 +8,28 @@ const PATHS: Record<AppId, string> = {
   resume: 'M3 1h7l3 3v11H3z M5 7h6v1H5z M5 9h6v1H5z M5 11h4v1H5z',
   contact: 'M1 3h14v10H1z M2 4h12v8H2z M3 5h2v1H3z M5 6h2v1H5z M7 7h2v1H7z M9 6h2v1H9z M11 5h2v1h-2z',
   terminal: 'M1 2h14v12H1z M2 4h12v9H2z M4 6h1v1H4z M5 7h1v1H5z M4 8h1v1H4z M7 9h4v1H7z',
+  credits: 'M2 2h12v12H2z M3 3h10v10H3z M7 4h2v2H7z M7 7h2v5H7z',
 }
 
-export function AppIcon({ id, className }: { id: AppId; className?: string }) {
+type IconProps = { className?: string }
+
+export function AppIcon({ id, className }: IconProps & { id: AppId }) {
   return (
     <svg viewBox="0 0 16 16" fill="currentColor" shapeRendering="crispEdges" aria-hidden="true" className={className}>
       <path fillRule="evenodd" d={PATHS[id]} />
+    </svg>
+  )
+}
+
+export function SpeakerIcon({ on, className }: IconProps & { on: boolean }) {
+  return (
+    <svg viewBox="0 0 16 16" fill="currentColor" shapeRendering="crispEdges" aria-hidden="true" className={className}>
+      <path d="M1 6h3l4-4v12l-4-4H1z" />
+      {on ? (
+        <path d="M10 6h1v4h-1z M12 4h1v8h-1z M14 3h1v10h-1z" />
+      ) : (
+        <path d="M10 6h1v1h-1z M11 7h1v2h-1z M10 9h1v1h-1z M13 6h1v1h-1z M12 7h1v2h-1z M13 9h1v1h-1z" />
+      )}
     </svg>
   )
 }

@@ -3,6 +3,7 @@ import { readSessionFlag, writeSessionFlag } from '../lib/prefs'
 import { APP_IDS } from './apps'
 import { AboutApp } from './apps/AboutApp'
 import { ContactApp } from './apps/ContactApp'
+import { CreditsApp } from './apps/CreditsApp'
 import { ExperienceApp } from './apps/ExperienceApp'
 import { ProjectsApp } from './apps/ProjectsApp'
 import { ResumeApp } from './apps/ResumeApp'
@@ -22,6 +23,7 @@ const APP_COMPONENTS = {
   resume: ResumeApp,
   contact: ContactApp,
   terminal: TerminalApp,
+  credits: CreditsApp,
 }
 
 type OSProps = {

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { playSound } from './sound'
 
 const LINES = [
   'YR-BIOS v2.6   (c) 2026 Yuvraj Randhawa',
@@ -16,6 +17,10 @@ const HOLD_MS = 450
 
 export function BootSequence({ onDone }: { onDone: () => void }) {
   const [shown, setShown] = useState(0)
+
+  useEffect(() => {
+    playSound('boot')
+  }, [])
 
   useEffect(() => {
     const timeout =

@@ -18,7 +18,12 @@ function seoHead(): Plugin {
         meta({ property: 'og:url', content: seo.url }),
         meta({ property: 'og:title', content: seo.title }),
         meta({ property: 'og:description', content: seo.description }),
-        meta({ name: 'twitter:card', content: 'summary' }),
+        meta({ property: 'og:image', content: seo.image }),
+        meta({ property: 'og:image:width', content: '1200' }),
+        meta({ property: 'og:image:height', content: '630' }),
+        meta({ property: 'og:image:type', content: 'image/png' }),
+        meta({ property: 'og:image:alt', content: seo.imageAlt }),
+        meta({ name: 'twitter:card', content: 'summary_large_image' }),
         {
           tag: 'script',
           attrs: { type: 'application/ld+json' },

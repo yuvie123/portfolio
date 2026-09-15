@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { APP_IDS, APPS, DESKTOP, type AppId, type Rect } from './apps'
+import { playSound } from './sound'
 
 export type WindowState = Rect & {
   open: boolean
@@ -57,20 +58,25 @@ function update(state: OSState, id: AppId, changes: Partial<WindowState>) {
   return { ...state.windows, [id]: { ...state.windows[id], ...changes } }
 }
 
-export const useOSStore = create<OSState>()((set) => ({
+export const useOSStore = create<OSState>()((set, get) => ({
   windows: initialWindows(),
   topZ: 0,
   focused: null,
 
-  open: (id) => set((state) => raise(state, id, { open: true })),
+  open: (id) => {
+    if (!get().windows[id].open) playSound('open')
+    set((state) => raise(state, id, { open: true }))
+  },
 
   focus: (id) => set((state) => (state.focused === id && !state.windows[id].minimized ? state : raise(state, id))),
 
-  close: (id) =>
+  close: (id) => {
+    playSound('close')
     set((state) => {
       const windows = update(state, id, { open: false, maximized: false })
       return { windows, focused: topmostVisible(windows) }
-    }),
+    })
+  },
 
   minimize: (id) =>
     set((state) => {

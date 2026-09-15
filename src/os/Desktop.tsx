@@ -15,7 +15,7 @@ export function Desktop() {
       </p>
 
       <ul aria-label="Desktop" className="relative grid w-fit gap-3 p-5">
-        {APP_IDS.map((id) => (
+        {APP_IDS.filter((id) => APPS[id].showOnDesktop).map((id) => (
           <li key={id}>
             <button
               type="button"

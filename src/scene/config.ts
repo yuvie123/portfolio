@@ -8,11 +8,14 @@ export const CAMERA = {
   far: 50,
 }
 
+/** Height of the desk surface; everything on the desk is placed relative to it. */
+export const DESK_TOP_Y = 0.75
+
 /** Slow orbit in front of the desk. Keep baseAzimuth ± (swing + parallax) within about ±0.44 rad (25°). */
 export const IDLE = {
-  lookAt: [0, 0.95, 0] as Vec3,
-  radius: 2.4,
-  height: 1.45,
+  lookAt: [0, 1.0, 0] as Vec3,
+  radius: 2.75,
+  height: 1.55,
   baseAzimuth: 0,
   swing: 0.3,
   speed: 0.08,
@@ -25,15 +28,26 @@ export const IDLE_START: Vec3 = [
   IDLE.lookAt[2] + Math.cos(IDLE.baseAzimuth) * IDLE.radius,
 ]
 
-/**
- * Where the OS is drawn: the monitor's glass, in world units.
- * Independent of any model so the CRT can be swapped by retuning these numbers.
- */
+/** Where the retro computer stands (bottom-centre of its case). It always faces +z. */
+export const COMPUTER_POSITION: Vec3 = [0, DESK_TOP_Y, -0.06]
+
+/** The monitor glass, relative to the computer's origin. Must stay 4:3 to match OS_SIZE. */
+export const MONITOR_GLASS = {
+  center: [0, 0.39, 0.1024] as Vec3,
+  width: 0.36,
+  height: 0.27,
+}
+
+/** Where the OS is drawn in world space: derived from the computer so it always sits on the glass. */
 export const SCREEN = {
-  position: [0, 1.06, 0.201] as Vec3,
+  position: [
+    COMPUTER_POSITION[0] + MONITOR_GLASS.center[0],
+    COMPUTER_POSITION[1] + MONITOR_GLASS.center[1],
+    COMPUTER_POSITION[2] + MONITOR_GLASS.center[2],
+  ] as Vec3,
   rotation: [0, 0, 0] as Vec3,
-  width: 0.44,
-  height: 0.33,
+  width: MONITOR_GLASS.width,
+  height: MONITOR_GLASS.height,
 }
 
 /** Logical CSS size the OS is laid out at (4:3, matching SCREEN). */

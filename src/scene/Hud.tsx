@@ -1,9 +1,19 @@
+import type { MouseEvent } from 'react'
 import { resume } from '../content/resume'
+import { setMode } from '../lib/mode'
 import { useSceneStore } from './store'
+
+// HUD buttons live inside the scene wrapper, whose click enters the monitor; keep their clicks to themselves.
+const own = (action: () => void) => (event: MouseEvent) => {
+  event.stopPropagation()
+  action()
+}
 
 export function Hud() {
   const view = useSceneStore((state) => state.view)
   const setView = useSceneStore((state) => state.setView)
+  const lowPerf = useSceneStore((state) => state.lowPerf)
+  const setLowPerf = useSceneStore((state) => state.setLowPerf)
   const { name, headline } = resume.profile
   const idle = view === 'idle'
 
@@ -12,14 +22,33 @@ export function Hud() {
       {!idle && (
         <button
           type="button"
-          onClick={(event) => {
-            event.stopPropagation()
-            setView('idle')
-          }}
+          onClick={own(() => setView('idle'))}
           className="fixed top-4 left-4 z-30 rounded-sm border border-accent/40 bg-ink/80 px-3 py-2 font-mono text-xs tracking-wider text-accent uppercase backdrop-blur transition-colors hover:bg-accent hover:text-ink"
         >
           ← Back to desk
         </button>
+      )}
+
+      {lowPerf && (
+        <div
+          role="status"
+          className="fixed top-16 right-4 z-30 flex max-w-xs items-start gap-3 rounded-sm border border-accent/40 bg-ink/90 p-3 font-mono text-xs text-muted backdrop-blur"
+        >
+          <p>
+            Running slowly?{' '}
+            <button type="button" onClick={own(() => setMode('2d'))} className="text-accent underline underline-offset-2">
+              View the 2D site
+            </button>
+          </p>
+          <button
+            type="button"
+            aria-label="Dismiss"
+            onClick={own(() => setLowPerf(false))}
+            className="leading-none text-muted hover:text-fg"
+          >
+            ×
+          </button>
+        </div>
       )}
 
       <div

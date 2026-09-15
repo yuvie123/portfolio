@@ -10,6 +10,9 @@ export const seo = {
   description: `${profile.name} is a Computer Science student at the University of Waterloo who builds backend APIs, embedded hardware, and machine learning projects.`,
   url: `${SITE_URL}/`,
   themeColor: '#0a0c0f',
+  /** Regenerate with `npm run og` after visual changes to the desk. */
+  image: `${SITE_URL}/og.png`,
+  imageAlt: `${profile.name}'s portfolio: a retro computer on a desk`,
 }
 
 export const personJsonLd = {
