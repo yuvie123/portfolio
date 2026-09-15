@@ -4,7 +4,7 @@ export function BulletList({ items, className = '' }: { items: string[]; classNa
       {items.map((item) => (
         <li
           key={item}
-          className="relative pl-5 before:absolute before:left-0 before:font-mono before:text-accent before:content-['▹']"
+          className="relative pl-5 before:absolute before:top-[0.6em] before:left-0.5 before:size-1.5 before:rotate-45 before:border-t-2 before:border-r-2 before:border-accent before:content-['']"
         >
           {item}
         </li>
