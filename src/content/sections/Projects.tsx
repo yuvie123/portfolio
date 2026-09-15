@@ -1,5 +1,6 @@
 import { Chips } from '../../components/Chips'
 import { DateRange } from '../../components/DateRange'
+import { MetricList } from '../../components/MetricList'
 import { resume } from '../resume'
 import { ProjectCaseStudy } from './ProjectCaseStudy'
 import { Section, type SectionOptions } from './Section'
@@ -25,17 +26,7 @@ export function Projects(options: SectionOptions) {
                 </header>
                 <p className="mt-2 text-muted">{project.tagline}</p>
 
-                <dl className="mt-5 grid gap-3 sm:grid-cols-3">
-                  {project.metrics.map((metric) => (
-                    <div
-                      key={metric.label}
-                      className="flex flex-col-reverse rounded-sm border border-line px-3 py-2"
-                    >
-                      <dt className="text-xs leading-snug text-muted">{metric.label}</dt>
-                      <dd className="font-display text-3xl leading-none text-accent">{metric.value}</dd>
-                    </div>
-                  ))}
-                </dl>
+                <MetricList metrics={project.metrics} className="mt-5" />
 
                 <Chips items={project.tech} label={`Technologies used in ${project.name}`} className="mt-5" />
 

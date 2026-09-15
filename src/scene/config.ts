@@ -1,3 +1,5 @@
+import { OS_SIZE } from '../os/apps'
+
 export type Vec3 = [number, number, number]
 
 export const CAMERA = {
@@ -35,10 +37,7 @@ export const SCREEN = {
 }
 
 /** Logical CSS size the OS is laid out at (4:3, matching SCREEN). */
-export const OS_RESOLUTION = {
-  width: 1280,
-  height: 960,
-}
+export const OS_RESOLUTION = OS_SIZE
 
 /** drei <Html transform> maps 1 CSS px to distanceFactor / 400 world units. */
 export const SCREEN_DISTANCE_FACTOR = (400 * SCREEN.width) / OS_RESOLUTION.width
