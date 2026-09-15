@@ -21,6 +21,7 @@ npm run dev       # http://localhost:5173
 npm run build     # typecheck + production build (prerendered HTML)
 npm run preview   # serve the production build
 npm run lint
+npm run test:e2e          # browser checks for 2D + 3D (with `npm run preview` running)
 
 npm run models:fetch      # download the CC0 desk models (see assets-src/models/CREDITS.md)
 npm run models:optimize   # compress them into public/models
