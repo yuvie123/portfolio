@@ -37,3 +37,34 @@
     @apply rounded-sm outline-2 outline-offset-4 outline-accent;
   }
 }
+
+/* 3D mode: the page doesn't scroll, and the prerendered 2D site stays in the DOM but out of view. */
+html[data-mode="3d"],
+html[data-mode="3d"] body {
+  height: 100%;
+  overflow: hidden;
+}
+
+html[data-mode="3d"] #site {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Shown from first paint until the 3D scene mounts. */
+html[data-mode="3d"]:not([data-scene]) body::before {
+  content: "BOOTING...";
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  background: var(--color-ink);
+  color: var(--color-accent);
+  font-family: var(--font-display);
+  font-size: 2rem;
+  letter-spacing: 0.15em;
+}

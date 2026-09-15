@@ -5,6 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>Yuvraj Randhawa</title>
+    <script>
+      // Decide between the 3D desk and the 2D site before first paint.
+      // Precedence: ?mode= query > saved choice > automatic detection. No WebGL always means 2D.
+      ;(function () {
+        var nav = navigator
+        var reasons = []
+        var webgl = false
+        function matches(query) {
+          return !!(window.matchMedia && window.matchMedia(query).matches)
+        }
+
+        if (/bot|crawl|spider|slurp|facebookexternalhit|linkedinbot|embedly|preview/i.test(nav.userAgent)) {
+          reasons.push('bot')
+        } else {
+          try {
+            var canvas = document.createElement('canvas')
+            var options = { failIfMajorPerformanceCaveat: true }
+            var gl = canvas.getContext('webgl2', options) || canvas.getContext('webgl', options)
+            if (gl) {
+              webgl = true
+              var debugInfo = gl.getExtension('WEBGL_debug_renderer_info')
+              var renderer = debugInfo ? String(gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL)) : ''
+              if (/swiftshader|llvmpipe|software|basic render/i.test(renderer)) reasons.push('software-renderer')
+              var lose = gl.getExtension('WEBGL_lose_context')
+              if (lose) lose.loseContext()
+            }
+          } catch (e) {}
+        }
+
+        if (!webgl) reasons.push('no-webgl')
+        if (matches('(prefers-reduced-motion: reduce)')) reasons.push('reduced-motion')
+        if (matches('(pointer: coarse)') && !matches('(any-pointer: fine)')) reasons.push('touch')
+        if (Math.min(window.innerWidth, window.innerHeight) < 600 || window.innerWidth < 900) reasons.push('small-viewport')
+        if ((nav.hardwareConcurrency && nav.hardwareConcurrency <= 2) || (nav.deviceMemory && nav.deviceMemory < 4)) {
+          reasons.push('low-power')
+        }
+        var connection = nav.connection
+        if (connection && (connection.saveData || /2g/.test(connection.effectiveType || ''))) reasons.push('save-data')
+
+        var auto = reasons.length ? '2d' : '3d'
+        var mode = auto
+        try {
+          var saved = localStorage.getItem('yr-mode')
+          if (saved === '2d' || saved === '3d') mode = saved
+        } catch (e) {}
+        var requested = new URLSearchParams(location.search).get('mode')
+        if (requested === '2d' || requested === '3d') mode = requested
+        if (!webgl) mode = '2d'
+
+        document.documentElement.setAttribute('data-mode', mode)
+        window.__YR_MODE__ = { mode: mode, auto: auto, reasons: reasons, webgl: webgl }
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>

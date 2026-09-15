@@ -5,7 +5,13 @@ import '@fontsource/ibm-plex-sans/latin-600.css'
 import '@fontsource/ibm-plex-mono/latin-400.css'
 import '@fontsource/vt323/latin-400.css'
 import App from './App.tsx'
+import { getInitialMode } from './lib/mode.ts'
 import './index.css'
+
+// Start downloading the 3D chunk right away instead of waiting for hydration to reach it.
+if (getInitialMode() === '3d') {
+  void import('./scene/Experience3D.tsx')
+}
 
 const container = document.getElementById('root')!
 const app = (
