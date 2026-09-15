@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0a0c0f;
+  --color-panel: #10141a;
+  --color-line: #1f262e;
+  --color-fg: #e2e8ee;
+  --color-muted: #8d99a6;
+  --color-accent: #7ee787;
+
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: "VT323", "IBM Plex Mono", ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply bg-ink font-sans text-fg antialiased;
+  }
+
+  ::selection {
+    @apply bg-accent/30 text-fg;
+  }
+
+  :where(a, button, summary):focus-visible {
+    @apply rounded-sm outline-2 outline-offset-4 outline-accent;
+  }
+}
