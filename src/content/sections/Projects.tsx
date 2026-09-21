@@ -1,5 +1,5 @@
 import { Chips } from '../../components/Chips'
-import { DateRange } from '../../components/DateRange'
+import { ProjectDates } from '../../components/ProjectDates'
 import { MetricList } from '../../components/MetricList'
 import { resume } from '../resume'
 import { ProjectCaseStudy } from './ProjectCaseStudy'
@@ -21,7 +21,7 @@ export function Projects(options: SectionOptions) {
                     {project.name}
                   </h3>
                   <p className="font-mono text-xs tracking-wider text-muted uppercase">
-                    <DateRange start={project.start} end={project.end} />
+                    <ProjectDates dates={project.dates} />
                   </p>
                 </header>
                 <p className="mt-2 text-muted">{project.tagline}</p>

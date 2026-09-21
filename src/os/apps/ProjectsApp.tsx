@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Chips } from '../../components/Chips'
-import { DateRange } from '../../components/DateRange'
+import { ProjectDates } from '../../components/ProjectDates'
 import { MetricList } from '../../components/MetricList'
 import { resume } from '../../content/resume'
 import { ProjectCaseStudy } from '../../content/sections/ProjectCaseStudy'
@@ -23,7 +23,7 @@ export function ProjectsApp() {
           {project.name}
         </h3>
         <p className="mt-2 font-mono text-xs tracking-wider text-muted uppercase">
-          <DateRange start={project.start} end={project.end} />
+          <ProjectDates dates={project.dates} />
         </p>
         <p className="mt-4 text-muted">{project.tagline}</p>
         <MetricList metrics={project.metrics} className="mt-6" />
@@ -46,7 +46,7 @@ export function ProjectsApp() {
             <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
               <h3 className="text-xl font-semibold text-fg">{item.name}</h3>
               <p className="font-mono text-xs tracking-wider text-muted uppercase">
-                <DateRange start={item.start} end={item.end} />
+                <ProjectDates dates={item.dates} />
               </p>
             </div>
             <p className="mt-2 text-muted">{item.tagline}</p>

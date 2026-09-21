@@ -53,12 +53,14 @@ export type CaseStudy = {
   results: string[]
 }
 
+/** Either a date range or a short label (e.g. a placement) shown where the dates would go. */
+export type ProjectDates = { start: YearMonth; end: YearMonth | null } | { label: string }
+
 export type Project = {
   slug: string
   name: string
   tagline: string
-  start: YearMonth
-  end: YearMonth | null
+  dates: ProjectDates
   tech: string[]
   metrics: Metric[]
   caseStudy: CaseStudy
