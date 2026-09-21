@@ -7,7 +7,7 @@ const { profile } = resume
 
 export const seo = {
   title: `${profile.name} | Software Engineer, Waterloo CS`,
-  description: `${profile.name} is a Computer Science student at the University of Waterloo who builds backend APIs, embedded hardware, and machine learning research and projects.`,
+  description: `${profile.name} is a Computer Science student at the University of Waterloo who builds backend APIs, embedded hardware and machine learning projects.`,
   url: `${SITE_URL}/`,
   themeColor: '#0a0c0f',
   /** Regenerate with `npm run og` after visual changes to the desk. */

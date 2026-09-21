@@ -17,8 +17,8 @@ export const resume: Resume = {
       github: 'https://github.com/yuvie123',
     },
     summary: [
-      "I'm a Computer Science student at the University of Waterloo who likes building software that has to work in the real world, from firmware on a sensor insole to inference-time compression of large language models.",
-      'Right now I am researching how compressible each SwiGLU projection is inside open LLMs. Before that I placed top 100 globally in the HRT × Partcl chip placement challenge, built the inventory and checkout backend at Pioneer & Legend Canada, and made Balance Track, a gait-recording insole developed with a physician.',
+      "I'm a Computer Science student at the University of Waterloo. I like building software that has to work in the real world, whether that's firmware on a sensor insole or compressing a large language model at inference time.",
+      "Right now I'm researching how much each SwiGLU projection can be compressed inside open LLMs. Before that I built the inventory and checkout backend at Pioneer & Legend Canada and made Balance Track, a gait-recording insole I developed with a physician. I also placed top 100 globally in the HRT × Partcl chip placement challenge.",
     ],
     resumePdf: null,
   },
@@ -72,7 +72,7 @@ export const resume: Resume = {
       ],
       caseStudy: {
         problem:
-          'SwiGLU feed-forward blocks have three projections: gate, up and down. If one of them tolerates a low-rank approximation much better than the others, that is where a compression budget should go. Nobody had measured it head to head at equal rank.',
+          "A SwiGLU feed-forward block has three projections: gate, up and down. If one of them handles a low-rank approximation much better than the others, that's where a compression budget should go, but nobody had measured the three head to head at equal rank.",
         approach: [
           'Truncated each projection with plain and whitened SVD across 6 rank fractions in 7 open LLMs up to 1.7B parameters, and scored every variant on WikiText-2 perplexity.',
           'Kept comparisons fair by matching parameter counts within 1.5% between the projections being compared.',
@@ -122,7 +122,7 @@ export const resume: Resume = {
       ],
       caseStudy: {
         problem:
-          'People with vestibular disorders walk differently, but that difference is usually only measured in a clinic. Guided by a physician in Fresno, California, I wanted a device patients could wear that records how they walk and turns it into a corrective insole.',
+          'People with vestibular disorders walk differently, but that difference usually only gets measured in a clinic. Working with a physician in Fresno, California, I wanted something patients could wear that records how they walk and turns that into a corrective insole.',
         approach: [
           'Wrote ESP32 firmware in C++ that reads an MPU6050 and BMP280 over I2C at 100 Hz, fuses gyro and accelerometer with a complementary filter after a 2-second bias calibration, and streams sessions over WiFi.',
           'Built a Python pipeline that detects heel strikes with a Butterworth low-pass filter and an adaptive two-cluster threshold, then z-scores cadence, stride-time variability and foot roll against height- and weight-scaled norms.',
@@ -147,7 +147,7 @@ export const resume: Resume = {
       ],
       caseStudy: {
         problem:
-          "Harvard's CS50 AI course covers search, optimization, machine learning, and neural networks through hands-on projects. These are the three I'm proudest of.",
+          "Harvard's CS50 AI course covers search, optimization, machine learning and neural networks through a set of projects. These are the three I'm proudest of.",
         approach: [
           'Trained a convolutional neural network in TensorFlow/Keras to classify road signs from all 43 categories of the German Traffic Sign Recognition Benchmark, tuning its layers to cut overfitting.',
           'Built a crossword generator that fills any grid from a word list, modeling it as a constraint satisfaction problem and solving it with arc consistency (AC-3) and backtracking search that uses heuristics to pick the next slot.',
